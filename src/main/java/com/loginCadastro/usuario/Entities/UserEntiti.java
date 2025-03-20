@@ -15,11 +15,33 @@ public class UserEntiti {
     @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
+    private boolean usuarioVerificado;
+
+    @Column(nullable = false)
+    private int code;
+
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String senha;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public boolean isUsuarioVerificado() {
+        return usuarioVerificado;
+    }
+
+    public void setUsuarioVerificado(boolean usuarioVerificado) {
+        this.usuarioVerificado = usuarioVerificado;
+    }
 
     public long getId() {
         return id;
