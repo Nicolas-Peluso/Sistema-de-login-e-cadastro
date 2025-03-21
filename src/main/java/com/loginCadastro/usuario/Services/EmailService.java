@@ -19,6 +19,7 @@ public class EmailService {
         SimpleMailMessage smm = new SimpleMailMessage();
         smm.setFrom("noreply@verificar.com");
         smm.setTo(email.to());
+        smm.setSubject(email.subject());
         smm.setText(email.body());
         this.jms.send(smm);
     }
