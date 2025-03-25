@@ -29,7 +29,7 @@ public class UserControl {
 
     @PostMapping("/verificar-email")
     public ResponseEntity<?> VerificarEmail(@RequestBody Code code){
-        boolean usuarioValidado = userService.ValidarCode(code.code(), code.email());
+        userService.ValidarCode(code);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(new ResponseDefault("Usuario Validado"));
     }

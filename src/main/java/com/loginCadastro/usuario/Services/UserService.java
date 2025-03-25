@@ -1,5 +1,6 @@
 package com.loginCadastro.usuario.Services;
 
+import com.loginCadastro.usuario.DTOs.Code;
 import com.loginCadastro.usuario.EmailEnt;
 import com.loginCadastro.usuario.Entities.UserEntiti;
 import com.loginCadastro.usuario.ExceptionsC.CadastroException;
@@ -56,23 +57,32 @@ public class UserService {
         return "";
     }
 
-    public boolean ValidarCode(int code, String email){
+    public boolean ValidarCode(Code code){
 
-            if(this.ur.getVerificado(email) != true && this.ur.getVerificado(email) != false){
-                throw new CodigoEmailInvalidoException("Enderco de email invalido");
+            if(code.email() == null || code.email().isEmpty()){
+                throw new CodigoEmailInvalidoException("Campo de email nao pode estar vazio");
             }
 
-            if(this.ur.getVerificado(email)){
+            if(code.code() == 0){
+                throw new CodigoEmailInvalidoException("Codigo esta vazio");
+            }
+
+            if(this.ur.existVerificado(code.email()).isEmpty()){
+                throw new CodigoEmailInvalidoException("Enderco de email invalido, ou nao logado verifique tente novamente");
+            }
+
+            if(this.ur.existVerificado(code.email()).get()){
                 throw new CodigoEmailInvalidoException("Usuario ja autenticado");
             }
 
-        int DbCode = this.ur.findCodeByEmail(email);
+        int DbCode = this.ur.findCodeByEmail(code.email());
 
-        if(DbCode == code){
-            this.ur.setUsuarioVerificado(email);
-            return true;
+        if(!(DbCode == code.code())){
+            throw new CodigoEmailInvalidoException("Codigo invalido ou expirado verifique e tente novamente");
         }
-        return false;
+
+        this.ur.setUsuarioVerificado(code.email());
+        return true;
     }
 
 }

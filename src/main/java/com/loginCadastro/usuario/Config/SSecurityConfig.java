@@ -16,6 +16,7 @@ public class SSecurityConfig {
         return http.authorizeHttpRequests(
                 autorizeConfig -> {
                     autorizeConfig.requestMatchers("/user").permitAll();
+                    autorizeConfig.requestMatchers("/user/verificar-email").permitAll();
                     autorizeConfig.anyRequest().authenticated();
                 }
         ).formLogin(Customizer.withDefaults())
