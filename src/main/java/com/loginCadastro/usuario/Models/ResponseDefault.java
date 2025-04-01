@@ -1,4 +1,4 @@
-package com.loginCadastro.usuario.utils;
+package com.loginCadastro.usuario.Models;
 
 public class ResponseDefault {
         private String Message;

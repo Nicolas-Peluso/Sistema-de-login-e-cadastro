@@ -24,10 +24,13 @@ public class UserEntiti {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String senha;
+    @Column(name = "senha", nullable = false)
+    private String password;
 
-    public int getCode() {
+    @Column(nullable = false)
+    private String timeCode;
+
+    public int getCode() {  
         return code;
     }
 
@@ -60,11 +63,11 @@ public class UserEntiti {
     }
 
     public String getSenha() {
-        return senha;
+        return password;
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.password = senha;
     }
 
     public String getEmail() {
@@ -73,5 +76,13 @@ public class UserEntiti {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTimeCode() {
+        return timeCode;
+    }
+
+    public void setTimeCode(String timeCode) {
+        this.timeCode = timeCode;
     }
 }

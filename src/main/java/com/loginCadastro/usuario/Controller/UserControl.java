@@ -2,9 +2,10 @@ package com.loginCadastro.usuario.Controller;
 
 import com.loginCadastro.usuario.DTOs.Code;
 import com.loginCadastro.usuario.ExceptionsC.CadastroException;
+import com.loginCadastro.usuario.Models.ResponseDefault;
 import com.loginCadastro.usuario.Services.UserService;
 import com.loginCadastro.usuario.UserEnt;
-import com.loginCadastro.usuario.utils.ResponseDefault;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

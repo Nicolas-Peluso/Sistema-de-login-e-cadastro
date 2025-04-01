@@ -2,7 +2,8 @@ package com.loginCadastro.usuario.Infra;
 
 import com.loginCadastro.usuario.ExceptionsC.CadastroException;
 import com.loginCadastro.usuario.ExceptionsC.CodigoEmailInvalidoException;
-import com.loginCadastro.usuario.utils.ResponseErro;
+import com.loginCadastro.usuario.Models.ResponseErro;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -13,6 +13,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 @Service
@@ -41,7 +43,7 @@ public class UserService {
             ue.setEmail(user.email());
             ue.setSenha(new BCryptPasswordEncoder().encode(user.senha()));
             ue.setUsuarioVerificado(false);
-
+            ue.setTimeCode(new SimpleDateFormat("mm").format(new Date()));
             Random r = new Random();
             ue.setCode(1000 + r.nextInt(9000));
 
@@ -73,6 +75,12 @@ public class UserService {
 
             if(this.ur.existVerificado(code.email()).get()){
                 throw new CodigoEmailInvalidoException("Usuario ja autenticado");
+            }
+
+            if(Integer.parseInt(this.ur.getTimeCodeByEmail(code.email())) >
+                    Integer.parseInt(new SimpleDateFormat("mm").format(new Date())))
+            {
+                throw new CodigoEmailInvalidoException("codig expirado por favor tente novamente");
             }
 
         int DbCode = this.ur.findCodeByEmail(code.email());
